@@ -19,34 +19,41 @@ public class Simulator {
 
     public int  attack(int armourClass, int attackMod, int defenseMod, String damageDice) {
         damage = rollDie();
-        System.out.println(damage);
         this.totalAttack = this.damage + attackMod;
 
         switch(damage) {
             case 1:
                 this.isCriticalMiss = true;
                 System.out.println("special negative");
+                System.out.println("Critical Miss!");
+                System.out.println("Miss 0 damage");
                 break;
             case 20:
                 this.isCriticalHit = true;
                 System.out.println("Critical hit");
+                printDamage();
                 rollDie();
                 break;
             default:
-                if(totalAttack > (armourClass + defenseMod)) {
-                    String[] attackDice = damageDice.split("d");
-                    System.out.println(Arrays.toString(attackDice));
-                    int sidesOfDie = Integer.parseInt(attackDice[0]);
-                    int amountOfRolls = Integer.parseInt(attackDice[1]);
-                    System.out.println(sidesOfDie);
-                    for(int i = 0; i < amountOfRolls; i++) {
-                        Die myDie = new Die(sidesOfDie);
-                        totalDamage =+ myDie.roll();
-                    }
-               //Die twentyDie = new Die(sidesOfDie);
+                printDamage();
+        }
+
+        totalDamage += damage;
+
+        if(totalAttack > (armourClass + defenseMod)) {
+            String[] attackDice = damageDice.split("d");
+            int sidesOfDie = Integer.parseInt(attackDice[0]);
+            int amountOfRolls = Integer.parseInt(attackDice[1]);
+            for(int i = 0; i < amountOfRolls; i++) {
+                Die myDie = new Die(sidesOfDie);
+                totalDamage =+ myDie.roll();
             }
         }
         return totalDamage;
+    }
+
+    private void printDamage() {
+        System.out.println("Hit " + damage + " damage delt");
     }
 
     public int rollDie() {
