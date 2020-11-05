@@ -53,7 +53,7 @@ public class Simulator {
     }
 
     private void printDamage() {
-        System.out.println("Hit " + damage + " damage delt");
+        System.out.println("Hit " + damage + " damage dealt");
     }
 
     public int rollDie() {

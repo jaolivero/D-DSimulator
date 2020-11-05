@@ -7,5 +7,6 @@ public class Main {
 
         sim.attack(5, 1, 5, "2d6");
 
+
     }
 }
